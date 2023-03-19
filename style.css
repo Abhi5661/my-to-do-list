@@ -1,77 +1,87 @@
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 body {
-  margin: 20px auto;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  background: greenyellow;
 }
 
 .container {
   text-align: center;
-  width: 500px;
-  margin: 20px auto;
-}
-.container h1 {
-  margin: 20px auto;
-}
-
-#userInput {
-  width: 300px;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  padding: 5px;
-  border-radius: 5px;
-}
-
-#btn {
-  width: 100px;
-  padding: 5px;
+  position: absolute;
+  top: 10%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  padding: 10px 20px;
+  background: yellow;
   border-radius: 10px;
-  background-color: blue;
-  color: white;
 }
 
-.myTodos {
-  background-color: lightgrey;
-  padding: 20px 10px;
-  box-sizing: border-box;
-}
-
-.todos {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  padding: 5px 10px;
-  border: 1px solid black;
+.input {
+  width: 70%;
+  padding: 10px;
+  border: none;
   border-radius: 5px;
-  background-color: white;
-  align-items: center;
+  font-size: 16px;
+  font-family: cursive;
+  margin-top: 10px;
+}
+
+.input::placeholder {
+  color: lightgray;
 }
 
 .btn {
-  padding: 5px;
+  padding: 10px;
+  margin-left: 10px;
   border-radius: 5px;
-  background-color: red;
+  background: green;
   color: white;
+  cursor: pointer;
 }
 
-.para {
-  font-size: 20px;
+.list {
+  padding: 0;
+  margin: 0;
+  margin-top: 10px;
 }
 
-.note {
-  margin: 20px;
+.list li {
+  list-style-type: none;
+  padding: 10px;
+  font-family: cursive;
+  border-top: dotted;
+  border-color: darkgray;
+  position: relative;
 }
 
-@media screen and (max-width: 650px) {
-  .container {
-    width: 380px;
-    margin: 20px 0;
-  }
+.list li .fa-square-check {
+  color: lightgray;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
 
-  #btn {
-    margin-bottom: 20px;
-  }
+.list li .fa-trash {
+  color: red;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.list li.checked {
+  color: darkgray;
+  text-decoration: line-through;
+  text-decoration-color: green;
+}
+
+.list li.checked .fa-square-check {
+  color: green;
 }
