@@ -1,35 +1,60 @@
-const input = document.getElementById("userInput");
-const btn = document.getElementById("btn");
-const todoList = document.querySelector(".myTodos");
+const inputEl = document.querySelector(".input");
+const buttonEl = document.querySelector(".btn");
+const ulEl = document.querySelector(".list");
 
-btn.addEventListener("click", function () {
-  console.log(input.value);
+let list = JSON.parse(localStorage.getItem("list"));
 
-  let todo = document.createElement("div");
-  todo.setAttribute("class", "todos");
-  let para = document.createElement("p");
-  para.setAttribute("class", "para");
-  para.innerText = input.value;
-  let button = document.createElement("button");
-  button.setAttribute("class", "btn");
-  button.innerHTML = "Delete";
-
-  todo.append(para);
-  todo.append(button);
-
-  todoList.append(todo);
-  input.value = "";
-
-  para.addEventListener("click", function () {
-    if ((para.style.textDecoration = "none")) {
-      para.style.textDecoration = "line-through";
-      para.style.textDecorationColor = "green";
-    } else {
-      para.style.textDecoration = "none";
-    }
-  });
-
-  button.addEventListener("click", function () {
-    todo.remove();
-  });
+list.forEach((task) => {
+  toDoList(task);
 });
+
+buttonEl.addEventListener("click", (event) => {
+  event.preventDefault();
+  toDoList();
+});
+
+function toDoList(task) {
+  let newTask = inputEl.value;
+  if (task) {
+    newTask = task.name;
+  }
+
+  const liEl = document.createElement("li");
+  if (task && task.checked) {
+    liEl.classList.add("checked");
+  }
+  liEl.innerText = newTask;
+  ulEl.appendChild(liEl);
+  inputEl.value = "";
+  const checkBtnEl = document.createElement("div");
+  checkBtnEl.innerHTML = `<i class="fa-solid fa-square-check"></i>`;
+  liEl.appendChild(checkBtnEl);
+  const trashBtnEl = document.createElement("div");
+  trashBtnEl.innerHTML = `<i class="fa-solid fa-trash"></i>`;
+  liEl.appendChild(trashBtnEl);
+
+  checkBtnEl.addEventListener("click", () => {
+    liEl.classList.toggle("checked");
+    updateLocalStorage();
+  });
+
+  trashBtnEl.addEventListener("click", () => {
+    liEl.remove();
+    updateLocalStorage();
+  });
+
+  updateLocalStorage();
+}
+
+function updateLocalStorage() {
+  const liEls = document.querySelectorAll("li");
+  list = [];
+  liEls.forEach((liEl) => {
+    list.push({
+      name: liEl.innerText,
+      checked: liEl.classList.contains("checked"),
+    });
+  });
+
+  localStorage.setItem("list", JSON.stringify(list));
+}
