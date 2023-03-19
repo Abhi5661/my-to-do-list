@@ -2,11 +2,11 @@ const inputEl = document.querySelector(".input");
 const buttonEl = document.querySelector(".btn");
 const ulEl = document.querySelector(".list");
 
-// let list = JSON.parse(localStorage.getItem("list"));
+let list = JSON.parse(localStorage.getItem("list"));
 
-// list.forEach((task) => {
-//   toDoList(task);
-// });
+list.forEach((task) => {
+  toDoList(task);
+});
 
 buttonEl.addEventListener("click", (event) => {
   event.preventDefault();
@@ -15,14 +15,14 @@ buttonEl.addEventListener("click", (event) => {
 
 function toDoList(task) {
   let newTask = inputEl.value;
-//   if (task) {
-//     newTask = task.name;
-//   }
+  if (task) {
+    newTask = task.name;
+  }
 
   const liEl = document.createElement("li");
-//   if (task && task.checked) {
-//     liEl.classList.add("checked");
-//   }
+  if (task && task.checked) {
+    liEl.classList.add("checked");
+  }
   liEl.innerText = newTask;
   ulEl.appendChild(liEl);
   inputEl.value = "";
@@ -35,26 +35,26 @@ function toDoList(task) {
 
   checkBtnEl.addEventListener("click", () => {
     liEl.classList.toggle("checked");
-//     updateLocalStorage();
+    updateLocalStorage();
   });
 
   trashBtnEl.addEventListener("click", () => {
     liEl.remove();
-//     updateLocalStorage();
+    updateLocalStorage();
   });
 
-//   updateLocalStorage();
+  updateLocalStorage();
 }
 
-// function updateLocalStorage() {
-//   const liEls = document.querySelectorAll("li");
-//   list = [];
-//   liEls.forEach((liEl) => {
-//     list.push({
-//       name: liEl.innerText,
-//       checked: liEl.classList.contains("checked"),
-//     });
-//   });
+function updateLocalStorage() {
+  const liEls = document.querySelectorAll("li");
+  list = [];
+  liEls.forEach((liEl) => {
+    list.push({
+      name: liEl.innerText,
+      checked: liEl.classList.contains("checked"),
+    });
+  });
 
-//   localStorage.setItem("list", JSON.stringify(list));
-// }
+  localStorage.setItem("list", JSON.stringify(list));
+}
